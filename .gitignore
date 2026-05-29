@@ -1,0 +1,15 @@
+
+# 1. Ignora absolutamente todos os arquivos por padrão
+*
+
+# 2. Permite que o Git rastreie diretórios (sem isso, ele não entra nas pastas para achar os .java)
+!*/
+
+# 3. Garante que a pasta 'out' e seus derivados sejam ignorados (sobrescreve a regra acima)
+out/
+
+# 4. Permite que os arquivos .java sejam rastreados
+!*.java
+
+# 5. Permite que o próprio .gitignore seja salvo no repositório (recomendado)
+!.gitignore
