@@ -1,6 +1,6 @@
 package application;
 
-import entities.People;
+import entities.Person;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -10,17 +10,15 @@ public class Main {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        int numberOfPeople;
-        double averageHeight;
-        double heightSum = 0.0;
-        int ages;
-
         System.out.print("How many people will be entered into the system? ");
-        numberOfPeople = sc.nextInt();
+        int numberOfPeople = sc.nextInt();
         sc.nextLine();
 
-        People[] vect = new People[numberOfPeople];
+        Person[] vect = new Person[numberOfPeople];
 
+        int minorData = 0;
+        double minorPercentage;
+        double heightSum = 0.0;
         for(int i=0; i < numberOfPeople; i++) {
             System.out.println((i+1) + " person data:");
             System.out.print("Name: ");
@@ -35,16 +33,24 @@ public class Main {
             System.out.println();
             sc.nextLine();
 
-            vect[i] = new People(name, age, height);
-        }
+            vect[i] = new Person(name, age, height);
 
-        for(int i=0; i < vect.length; i++) {
+            if(vect[i].getAge() < 16) {
+                minorData += 1;
+            }
             heightSum += vect[i].getHeight();
         }
 
-        averageHeight = heightSum / vect.length;
-        System.out.printf("AVERAGE HEIGHT = %.2f", averageHeight);
+        minorPercentage = ((double)minorData / numberOfPeople) * 100.0;
+        double averageHeight = heightSum / vect.length;
+        System.out.printf("AVERAGE HEIGHT = %.2f\n", averageHeight);
+        System.out.printf("PEOPLE UNDER 16 YEARS OLD: %.1f%%\n", minorPercentage);
 
+        for(int i=0; i < vect.length; i++) {
+            if(vect[i].getAge() < 16) {
+                System.out.printf("%s\n", vect[i].getName());
+            }
+        }
         sc.close();
     }
 }
