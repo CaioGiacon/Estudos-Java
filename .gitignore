@@ -14,3 +14,4 @@ out/
 # 5. Permite que o próprio .gitignore seja salvo no repositório (recomendado)
 !.gitignore
 .idea/
+status.md
